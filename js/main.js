@@ -21,6 +21,7 @@ var map;
 var player;
 var cursors;
 var groundLayer, coinLayer;
+var score = 0;
 var text;
 function preload() {
     this.load.tilemapTiledJSON('map', 'assets/map.json');
@@ -78,6 +79,13 @@ function create() {
         frameRate: 10,
     });
 
+    //score
+    text = this.add.text(20, 570, '0', {
+        fontSize: '20px',
+        fill: '#ffffff'
+    });
+    text.setScrollFactor(0);
+
 }
 
 function update(time, delta) {    
@@ -96,4 +104,11 @@ function update(time, delta) {
         player.body.setVelocityX(0);
         player.anims.play('idle', true);
     }  
+}
+
+function collectCoin(sprite, tile) {
+    coinLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
+    score ++; // increment the score
+    text.setText(score); // set the text to show the current score
+    return false;
 }
