@@ -8,6 +8,7 @@
 ## Self-Evaluation:
 
 how many points out of 20 do you deserve on this assignment:
+20
 
 ## Self-Reflection:
 I followed this tutorial:https://gamedevacademy.org/how-to-make-a-mario-style-platformer-with-phaser-3/
