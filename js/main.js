@@ -100,10 +100,16 @@ function update(time, delta) {
         player.body.setVelocityX(200); // move right
         player.anims.play('walk', true); // play walk animatio
         player.flipX = false; // use the original sprite looking to the right
-    } else {
+    }else {
         player.body.setVelocityX(0);
         player.anims.play('idle', true);
     }  
+
+        // jump 
+    if (cursors.up.isDown && player.body.onFloor())
+    {
+        player.body.setVelocityY(-500);        
+    }
 }
 
 function collectCoin(sprite, tile) {
