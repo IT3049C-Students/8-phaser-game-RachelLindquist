@@ -29,6 +29,7 @@ function preload() {
     this.load.atlas('player', 'assets/player.png', 'assets/player.json');
 }
 function create() {
+    //background code
     map = this.make.tilemap({key: 'map'});
     
     var groundTiles = map.addTilesetImage('tiles');
@@ -38,6 +39,13 @@ function create() {
     //camera limits
     this.physics.world.bounds.width = groundLayer.width;
     this.physics.world.bounds.height = groundLayer.height;
+
+    //player code
+    player = this.physics.add.sprite(200, 200, 'player'); 
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+    this.physics.add.collider(groundLayer, player);
 }
 function update() {
 }
