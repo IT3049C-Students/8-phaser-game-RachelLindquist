@@ -46,7 +46,14 @@ function create() {
     player.setCollideWorldBounds(true);
 
     this.physics.add.collider(groundLayer, player);
+
+    //control
     cursors = this.input.keyboard.createCursorKeys();
+
+    //camera
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    this.cameras.main.startFollow(player);   
+    this.cameras.main.setBackgroundColor('#ccccff'); 
 
 }
 function update() {
