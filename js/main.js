@@ -36,6 +36,10 @@ function create() {
     groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
     groundLayer.setCollisionByExclusion([-1]);
 
+    //coins
+    var coinTiles = map.addTilesetImage('coin');
+    coinLayer = map.createDynamicLayer('Coins', coinTiles, 0, 0);
+
     //camera limits
     this.physics.world.bounds.width = groundLayer.width;
     this.physics.world.bounds.height = groundLayer.height;
@@ -45,7 +49,12 @@ function create() {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
+    player.body.setSize(player.width, player.height-8);
     this.physics.add.collider(groundLayer, player);
+
+    //coin collect
+    coinLayer.setTileIndexCallback(17, collectCoin, this); // the coin id is 17  
+    this.physics.add.overlap(player, coinLayer);
 
     //control
     cursors = this.input.keyboard.createCursorKeys();
@@ -61,6 +70,12 @@ function create() {
         frames: this.anims.generateFrameNames('player', { prefix: 'p1_walk', start: 1, end: 11, zeroPad: 2 }),
         frameRate: 10,
         repeat: -1
+    });
+
+    this.anims.create({
+        key: 'idle',
+        frames: [{key: 'player', frame: 'p1_stand'}],
+        frameRate: 10,
     });
 
 }
