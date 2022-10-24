@@ -55,18 +55,30 @@ function create() {
     this.cameras.main.startFollow(player);   
     this.cameras.main.setBackgroundColor('#ccccff'); 
 
+    //animation
+    this.anims.create({ //walking
+        key: 'walk',
+        frames: this.anims.generateFrameNames('player', { prefix: 'p1_walk', start: 1, end: 11, zeroPad: 2 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
 }
-function update() {
-    if (cursors.left.isDown) // if the left arrow key is down
+
+function update(time, delta) {    
+    if (cursors.left.isDown)
     {
         player.body.setVelocityX(-200); // move left
+        player.anims.play('walk', true); // play walk animation
+        player.flipX= true; // flip the sprite to the left
     }
-    else if (cursors.right.isDown) // if the right arrow key is down
+    else if (cursors.right.isDown)
     {
         player.body.setVelocityX(200); // move right
-    }
-    if ((cursors.space.isDown || cursors.up.isDown) && player.body.onFloor())
-    {
-        player.body.setVelocityY(-500); // jump up
-    }
+        player.anims.play('walk', true); // play walk animatio
+        player.flipX = false; // use the original sprite looking to the right
+    } else {
+        player.body.setVelocityX(0);
+        player.anims.play('idle', true);
+    }  
 }
