@@ -46,6 +46,20 @@ function create() {
     player.setCollideWorldBounds(true);
 
     this.physics.add.collider(groundLayer, player);
+    cursors = this.input.keyboard.createCursorKeys();
+
 }
 function update() {
+    if (cursors.left.isDown) // if the left arrow key is down
+    {
+        player.body.setVelocityX(-200); // move left
+    }
+    else if (cursors.right.isDown) // if the right arrow key is down
+    {
+        player.body.setVelocityX(200); // move right
+    }
+    if ((cursors.space.isDown || cursors.up.isDown) && player.body.onFloor())
+    {
+        player.body.setVelocityY(-500); // jump up
+    }
 }
