@@ -28,6 +28,11 @@ function preload() {
     this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
     this.load.image('coin', 'assets/coinGold.png');
     this.load.atlas('player', 'assets/player.png', 'assets/player.json');
+
+    this.load.audio('coin' , ['assets/coin.wav']);
+    this.load.audio('jump', ['assets/jump.wav']);
+
+
 }
 function create() {
     //background code
@@ -108,11 +113,13 @@ function update(time, delta) {
         // jump 
     if (cursors.up.isDown && player.body.onFloor())
     {
+        this.sound.play('jump');
         player.body.setVelocityY(-500);        
     }
 }
 
 function collectCoin(sprite, tile) {
+    this.sound.play('coin');
     coinLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
     score ++; // increment the score
     text.setText(score); // set the text to show the current score
